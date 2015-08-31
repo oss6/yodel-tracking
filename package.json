@@ -1,0 +1,37 @@
+{
+  "name": "yodel-tracking",
+  "version": "0.1.0",
+  "description": "Get the tracking history for a Yodel parcel",
+  "license": "MIT",
+  "repository": "oss6/yodel-tracking",
+  "author": {
+    "name": "Ossama Edbali",
+    "email": "ossedb@gmail.com",
+    "url": "oss6.github.io"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "echo 'No tests right now'"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "tracking",
+    "yodel",
+    "courier",
+    "couriers",
+    "shipment",
+    "shipments",
+    "consignment",
+    "consignments",
+    "parcel",
+    "parcels"
+  ],
+  "dependencies": {
+    "request": "^2.61.0",
+    "xml2js": "^0.4.10"
+  }
+}
