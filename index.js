@@ -3,12 +3,17 @@
 var request = require('request');
 var parseString = require('xml2js').parseString;
 
-module.exports = function (parcelNumber, countryCode, date) {
+module.exports = function (parcelNumber, countryCode, date, cb) {
     var url = 'http://tracking.yodel.co.uk/wrd/run/wt_xml_gen_pw.getParcelHistory';
 
 	// Validate parameters
     if (typeof parcelNumber === 'undefined' || typeof countryCode === 'undefined' || countryCode.length !== 2) {
-        throw new Error('');
+        throw new Error('Parameter validation failed.');
+    }
+
+    if (typeof date === 'function') {
+        cb = date;
+        date = undefined;
     }
 
 	// URL construction
@@ -20,17 +25,12 @@ module.exports = function (parcelNumber, countryCode, date) {
     request(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             parseString(body, function (err, result) {
-                if (!err) {
-                    return result;
-                }
-                else {
-                    throw new Error(err);
-                }
+                cb(err, !err ? result : 'Error parsing XML');
             });
         }
         else {
-            throw new Error(error);
+            cb(error, 'Request error: ' + response.statusCode);
         }
     });
-    
+
 };
